@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>家乡定位</title>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=e1WB6FEPSc5IvtG1VF8HYK9gmlVQyNxq"></script>
+      <style> p{text-align: left} </style>
+  </head>
+  
+  <body>
+    <div style="width:1200px;height:600px;border:#ccc solid 1px;font-size:12px" id="map"></div>
+    <p style="color:burlywood;font-weight:600">本人家乡为湖南省怀化市溆浦县，该地图显示以溆浦县为中心，初始缩放级别为13；拖移鼠标可以调整中心位置，滑动滚轮可以调整缩放比例</p>
+  <a href="http://www.baidu.com/">
+      <button>点击我显示家乡介绍</button>
+  </a>
+  </body>
+  <script type="text/javascript">
+    //创建和初始化地图函数：
+    function initMap(){
+      createMap();//创建地图
+      setMapEvent();//设置地图事件
+      addMapControl();//向地图添加控件
+      addMapOverlay();//向地图添加覆盖物
+    }
+    function createMap(){ 
+      map = new BMap.Map("map"); 
+      map.centerAndZoom(new BMap.Point(110.59593,27.91564398),13);
+    }
+    function setMapEvent(){
+      map.enableScrollWheelZoom();
+      map.enableKeyboard();
+      map.enableDragging();
+      map.enableDoubleClickZoom()
+    }
+    function addClickHandler(target,window){
+      target.addEventListener("click",function(){
+        target.openInfoWindow(window);
+      });
+    }
+    function addMapOverlay(){
+    }
+    //向地图添加控件
+    function addMapControl(){
+      var scaleControl = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
+      scaleControl.setUnit(BMAP_UNIT_IMPERIAL);
+      map.addControl(scaleControl);
+      var navControl = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
+      map.addControl(navControl);
+      var overviewControl = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:true});
+      map.addControl(overviewControl);
+    }
+    var map;
+      initMap();
+  </script>
+</html>
